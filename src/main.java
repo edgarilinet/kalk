@@ -93,7 +93,7 @@ public class main {
             }
 
         }
-        //System.out.println(fromIndex + " from index ");
+        System.out.println(fromIndex + " from index ");
         return positionZnak;
     }
     public static int poiskVsehZnakov(String vvod){
@@ -104,14 +104,13 @@ public class main {
         ArrayList <Integer> arrayListLarge = new ArrayList<Integer>(100000);
         LinkedList <Integer> linkedList = new LinkedList<Integer>();
         arrayList.add(0,0);
-        int  i = 0, k;
+        int  i = 1, k;
         vvod = " " + vvod;
-        while (arrayList.get(i) != -1){
-            if (znak(vvod,i + 1 ) == -1) break;
-            arrayList.add(i, znak(vvod,i + 1 ));
+        while (znak(vvod,arrayList.get(i-1) + 1 ) != -1){
+            arrayList.add(i, znak(vvod,arrayList.get(i-1) + 1 ));
             System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
             i++;
         }
-        return arrayList.size();
+        return (arrayList.size() - 1);
     }
 }
