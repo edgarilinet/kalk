@@ -82,7 +82,7 @@ public class main {
         System.out.println(pervoeChislo + " - pervoeChislo");
         System.out.println(vtoroeChislo + " - vtoroeChislo");
         System.out.println(tretieChislo + " - tretieChislo");
-        System.out.println(poiskVsehZnakov(vvod) + " - mas.lenght");
+        System.out.println(poiskVsehZnakov(vvod) + " - arrayList.size()");
     }
     public static int znak ( String vvod, int fromIndex) {
         char[] znaki = {'+','-','*','/'};
@@ -91,7 +91,9 @@ public class main {
             if (positionZnak == -1){
                 positionZnak = vvod.indexOf(znaki[i], fromIndex);
             }
+
         }
+        //System.out.println(fromIndex + " from index ");
         return positionZnak;
     }
     public static int poiskVsehZnakov(String vvod){
@@ -102,18 +104,14 @@ public class main {
         ArrayList <Integer> arrayListLarge = new ArrayList<Integer>(100000);
         LinkedList <Integer> linkedList = new LinkedList<Integer>();
         arrayList.add(0,0);
-        int  i;
+        int  i = 0, k;
         vvod = " " + vvod;
-        for (i = 1; i < 100; i ++){
-            arrayList.add(znak(vvod,(arrayList.get(i) + 1)));
-            System.out.println(arrayList.get(i));
-            if (arrayList.get(i) == -1) break;
+        while (arrayList.get(i) != -1){
+            if (znak(vvod,i + 1 ) == -1) break;
+            arrayList.add(i, znak(vvod,i + 1 ));
+            System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
+            i++;
         }
-        int arraySize = arrayList.size();
-        int linkedSize = linkedList.size();
-
-
-
         return arrayList.size();
     }
 }
