@@ -83,6 +83,13 @@ public class main {
         System.out.println(vtoroeChislo + " - vtoroeChislo");
         System.out.println(tretieChislo + " - tretieChislo");
         System.out.println(poiskVsehZnakov(vvod) + " - arrayList.size()");
+        int[] mas;
+        mas = new int[poiskVsehZnakov(vvod).size()-1];
+        for (int i = 0 ; i != poiskVsehZnakov(vvod).size(); i++){
+            mas[i] = poiskVsehZnakov(vvod).get(i);
+            System.out.println(mas[i] + " - " + i);
+        }
+
     }
     public static int znak ( String vvod, int fromIndex) {
         char[] znaki = {'+','-','*','/'};
@@ -91,13 +98,12 @@ public class main {
             if (positionZnak == -1){
                 positionZnak = vvod.indexOf(znaki[i], fromIndex);
             }
-
         }
-        System.out.println(fromIndex + " from index ");
+        //System.out.println(fromIndex + " from index ");
         return positionZnak;
     }
-    public static int poiskVsehZnakov(String vvod){
-        /*нужно найти все знаки которые есть в примере КАК ЭТО СДЕЛАТЬ? 0_0 а что если найти количество знаков?
+    public static ArrayList<Integer> poiskVsehZnakov(String vvod){
+        /*нужно найти все знаки которые есть в примере КАК ЭТО СДЕЛАТЬ? 0_0
          а что если найти колличество знаков?
          */
         ArrayList <Integer> arrayList = new ArrayList<Integer>();
@@ -108,9 +114,24 @@ public class main {
         vvod = " " + vvod;
         while (znak(vvod,arrayList.get(i-1) + 1 ) != -1){
             arrayList.add(i, znak(vvod,arrayList.get(i-1) + 1 ));
-            System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
+            //System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
             i++;
         }
-        return (arrayList.size() - 1);
+        return (arrayList);
+    }
+    public static int itog(int vvod1, int vvod2, String deistvie){
+        int result = 0;
+        switch (deistvie) {
+            case ("+") -> result = vvod1 + vvod2;
+            case ("-") -> result = vvod1 - vvod2;
+            case ("*") -> result = vvod1 * vvod2;
+            case ("/") -> result = vvod1 / vvod2;
+        }
+        if (vvod1 != 0 & vvod2 == 0 & deistvie.equals("/")){
+            System.out.println("Na 0 delit' nelzya");
+        } else if (vvod1 == 0 & vvod2 == 0 & deistvie.equals("/")){
+            result = 1;
+        }
+        return result;
     }
 }
