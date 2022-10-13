@@ -65,8 +65,8 @@ public class main {
         vvod = sc.next();
         positionZnakof = new char[poiskVsehZnakov(vvod).size()-1];
         for (int i = 1 ; i <= poiskVsehZnakov(vvod).size()-1; i++){
-            positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i));
-            System.out.println(positionZnakof[i-1] + " - " + vvod.charAt(poiskVsehZnakov(vvod).get(i)) + " = " + poiskVsehZnakov(vvod).get(i));
+            positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i)-1);
+            System.out.println(positionZnakof[i-1]);
         }
         positionZnak = znak(vvod, fromIndex);
         System.out.println(positionZnak + " - position znak");
