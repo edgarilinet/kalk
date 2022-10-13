@@ -59,9 +59,15 @@ public class main {
         int pervoeChislo = -120, vtoroeChislo = -120, tretieChislo = -120;
         int positionZnak = 0, positionVtoroiZnak = 0 , positionRavno = 0;
         int fromIndex = 0; //от какого числа искать символы
+        char[] positionZnakof;
         System.out.println("Hello i'm calk vvodi primer");
         Scanner sc = new Scanner(System.in);
         vvod = sc.next();
+        positionZnakof = new char[poiskVsehZnakov(vvod).size()-1];
+        for (int i = 1 ; i <= poiskVsehZnakov(vvod).size()-1; i++){
+            positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i));
+            System.out.println(positionZnakof[i-1] + " - " + vvod.charAt(poiskVsehZnakov(vvod).get(i)) + " = " + poiskVsehZnakov(vvod).get(i));
+        }
         positionZnak = znak(vvod, fromIndex);
         System.out.println(positionZnak + " - position znak");
         fromIndex = positionZnak + 1;
@@ -83,12 +89,7 @@ public class main {
         System.out.println(vtoroeChislo + " - vtoroeChislo");
         System.out.println(tretieChislo + " - tretieChislo");
         System.out.println(poiskVsehZnakov(vvod) + " - arrayList.size()");
-        int[] mas;
-        mas = new int[poiskVsehZnakov(vvod).size()-1];
-        for (int i = 0 ; i != poiskVsehZnakov(vvod).size(); i++){
-            mas[i] = poiskVsehZnakov(vvod).get(i);
-            System.out.println(mas[i] + " - " + i);
-        }
+
 
     }
     public static int znak ( String vvod, int fromIndex) {
@@ -107,8 +108,8 @@ public class main {
          а что если найти колличество знаков?
          */
         ArrayList <Integer> arrayList = new ArrayList<Integer>();
-        ArrayList <Integer> arrayListLarge = new ArrayList<Integer>(100000);
-        LinkedList <Integer> linkedList = new LinkedList<Integer>();
+        //ArrayList <Integer> arrayListLarge = new ArrayList<Integer>(100000);
+        //LinkedList <Integer> linkedList = new LinkedList<Integer>();
         arrayList.add(0,0);
         int  i = 1, k;
         vvod = " " + vvod;
