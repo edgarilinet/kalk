@@ -66,32 +66,17 @@ public class main {
         positionZnakof = new char[poiskVsehZnakov(vvod).size()-1];
         for (int i = 1 ; i <= poiskVsehZnakov(vvod).size()-1; i++){
             positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i)-1);
-            System.out.println(positionZnakof[i-1]);
+            System.out.print(positionZnakof[i-1] + " - ");
+            System.out.println();
         }
-        positionZnak = znak(vvod, fromIndex);
-        System.out.println(positionZnak + " - position znak");
         fromIndex = positionZnak + 1;
         //System.out.println(fromIndex + " - from index");
-        positionVtoroiZnak = znak(vvod, fromIndex);
-        //System.out.println(positionVtoroiZnak + " - position vtoroi znsk");
         positionRavno = vvod.indexOf('=');
-        if (positionVtoroiZnak == -1){
-            pervoeChislo = Integer.parseInt(vvod.substring(0,positionZnak));
-            vtoroeChislo = Integer.parseInt(vvod.substring(positionZnak + 1 , vvod.length()));
-        } else if (positionVtoroiZnak != -1) {
-            pervoeChislo = Integer.parseInt(vvod.substring(0,positionZnak));
-            vtoroeChislo = Integer.parseInt(vvod.substring(positionZnak + 1 , positionVtoroiZnak));
-            tretieChislo = Integer.parseInt(vvod.substring(positionVtoroiZnak + 1 , vvod.length()));
-        }
-
-
-        System.out.println(pervoeChislo + " - pervoeChislo");
-        System.out.println(vtoroeChislo + " - vtoroeChislo");
-        System.out.println(tretieChislo + " - tretieChislo");
+        System.out.println(poiskVsehChisel(vvod));
         System.out.println(poiskVsehZnakov(vvod) + " - arrayList.size()");
-
-
     }
+
+
     public static int znak ( String vvod, int fromIndex) {
         char[] znaki = {'+','-','*','/'};
         int positionZnak = -1;
@@ -100,16 +85,15 @@ public class main {
                 positionZnak = vvod.indexOf(znaki[i], fromIndex);
             }
         }
-        //System.out.println(fromIndex + " from index ");
         return positionZnak;
     }
+
+
     public static ArrayList<Integer> poiskVsehZnakov(String vvod){
         /*нужно найти все знаки которые есть в примере КАК ЭТО СДЕЛАТЬ? 0_0
          а что если найти колличество знаков?
          */
         ArrayList <Integer> arrayList = new ArrayList<Integer>();
-        //ArrayList <Integer> arrayListLarge = new ArrayList<Integer>(100000);
-        //LinkedList <Integer> linkedList = new LinkedList<Integer>();
         arrayList.add(0,0);
         int  i = 1, k;
         vvod = " " + vvod;
@@ -120,6 +104,16 @@ public class main {
         }
         return (arrayList);
     }
+
+    public static ArrayList<Integer> poiskVsehChisel(String vvod){
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        for (int i = 1; i != poiskVsehZnakov(vvod).size(); i++){
+            arrayList.add(i-1, poiskVsehZnakov(vvod).get(i));
+            System.out.println(arrayList.get(i));
+        }
+        return arrayList;
+    }
+
     public static int itog(int vvod1, int vvod2, String deistvie){
         int result = 0;
         switch (deistvie) {
@@ -135,4 +129,5 @@ public class main {
         }
         return result;
     }
+
 }
