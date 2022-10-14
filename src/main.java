@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.SplittableRandom;
 
 public class main {
 
@@ -40,45 +40,35 @@ public class main {
         }
         return testDeistvie;
     }
-
-    public static String proverkaZnakaDeistvie(String deistvie, boolean testDeistvie, Scanner sc){
-        deistvie = sc.next();
-        testDeistvie = znakDeistvie(deistvie);
-        //System.out.println(testDeistvie);
-        while (!testDeistvie){
-            //System.out.println(testDeistvie);
-            System.out.println("Vvedite deistvie ");
-            deistvie = sc.next();
-            testDeistvie = znakDeistvie(deistvie);
-        }
-        //System.out.println(deistvie);
-        return deistvie;
     }*/
+
     public static void main(String[] args) {
-        String deistvie = null, vvod;
-        int pervoeChislo = -120, vtoroeChislo = -120, tretieChislo = -120;
-        int positionZnak = 0, positionVtoroiZnak = 0 , positionRavno = 0;
+        String vvod;
+        int positionZnak = 0, positionRavno = 0;
         int fromIndex = 0; //от какого числа искать символы
         char[] positionZnakof;
         System.out.println("Hello i'm calk vvodi primer");
         Scanner sc = new Scanner(System.in);
         vvod = sc.next();
+        if (vvod.equals("0")){
+            vvod = "1+2-3*4/5";
+        }
         positionZnakof = new char[poiskVsehZnakov(vvod).size()-1];
         for (int i = 1 ; i <= poiskVsehZnakov(vvod).size()-1; i++){
             positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i)-1);
-            System.out.print(positionZnakof[i-1] + " - ");
-            System.out.println();
+            System.out.println(positionZnakof[i-1] + " - znak ");
         }
         fromIndex = positionZnak + 1;
         //System.out.println(fromIndex + " - from index");
         positionRavno = vvod.indexOf('=');
-        System.out.println(poiskVsehChisel(vvod));
-        System.out.println(poiskVsehZnakov(vvod) + " - arrayList.size()");
+        System.out.println(poiskVsehZnakov(vvod) + " - poiskVsehZnakov(vvod)");
+        System.out.println(poiskVsehChisel(vvod) + " - poiskVsehChisel(vvod)");
     }
 
 
     public static int znak ( String vvod, int fromIndex) {
-        char[] znaki = {'+','-','*','/'};
+        //Определяем знак
+        char[] znaki = {'*','/','+','-'};
         int positionZnak = -1;
         for (int i = 0; i < znaki.length; i++){
             if (positionZnak == -1){
@@ -100,16 +90,22 @@ public class main {
         while (znak(vvod,arrayList.get(i-1) + 1 ) != -1){
             arrayList.add(i, znak(vvod,arrayList.get(i-1) + 1 ));
             //System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
+            System.out.println(arrayList.get(i-1) + 1 + " fromIndex");
             i++;
         }
         return (arrayList);
+
     }
 
-    public static ArrayList<Integer> poiskVsehChisel(String vvod){
-        ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        for (int i = 1; i != poiskVsehZnakov(vvod).size(); i++){
-            arrayList.add(i-1, poiskVsehZnakov(vvod).get(i));
-            System.out.println(arrayList.get(i));
+    public static ArrayList<String> poiskVsehChisel(String vvod){
+        // ищем все числа
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 1; i <= poiskVsehZnakov(vvod).size(); i++){
+            if (i<poiskVsehZnakov(vvod).size()){
+                arrayList.add(i-1, vvod.substring(poiskVsehZnakov(vvod).get(i-1), (poiskVsehZnakov(vvod).get(i))-1) );
+            } else {
+                arrayList.add(i-1, vvod.substring(poiskVsehZnakov(vvod).get(i-1), vvod.length() ));
+            }
         }
         return arrayList;
     }
@@ -121,11 +117,6 @@ public class main {
             case ("-") -> result = vvod1 - vvod2;
             case ("*") -> result = vvod1 * vvod2;
             case ("/") -> result = vvod1 / vvod2;
-        }
-        if (vvod1 != 0 & vvod2 == 0 & deistvie.equals("/")){
-            System.out.println("Na 0 delit' nelzya");
-        } else if (vvod1 == 0 & vvod2 == 0 & deistvie.equals("/")){
-            result = 1;
         }
         return result;
     }
