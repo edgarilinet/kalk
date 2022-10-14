@@ -67,15 +67,20 @@ public class main {
 
     public static int znak ( String vvod, int fromIndex) {
         //Определяем знак ПОЧЕМУ ОНО ПРОПУСКАЕТ ЗНАКИ???
-        char[] znaki = {'*','/','+','-'};
+        char[] znaki = {'+','-','*','/'};
         int positionZnak = -1;
-        for (int i = 0; i < znaki.length; i++){
+        //System.out.println(znaki + " - znaki");
+        /*for (int i = 0; i < znaki.length; i++){
             if (positionZnak == -1){
                 positionZnak = vvod.indexOf(znaki[i], fromIndex);
             }
             //System.out.println(positionZnak + " - positionZnak");
-        }
-
+        }*/
+        char plus = '+', minus = '-', mnoj = '*', del = '/';
+        positionZnak = vvod.indexOf(plus, fromIndex);
+        if (positionZnak == -1) positionZnak = vvod.indexOf(minus, fromIndex);
+        if (positionZnak == -1) positionZnak = vvod.indexOf(del, fromIndex);
+        if (positionZnak == -1) positionZnak = vvod.indexOf(mnoj, fromIndex);
         return positionZnak;
     }
 
