@@ -1,3 +1,4 @@
+import java.lang.ref.Cleaner;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SplittableRandom;
@@ -50,9 +51,7 @@ public class main {
         System.out.println("Hello i'm calk vvodi primer");
         Scanner sc = new Scanner(System.in);
         vvod = sc.next();
-        if (vvod.equals("0")){
-            vvod = "1+2-3*4/5";
-        }
+        if (vvod.equals("0")) vvod = "1+2-3*4/5";
         positionZnakof = new char[poiskVsehZnakov(vvod).size()-1];
         for (int i = 1 ; i <= poiskVsehZnakov(vvod).size()-1; i++){
             positionZnakof[i-1] = vvod.charAt(poiskVsehZnakov(vvod).get(i)-1);
@@ -67,14 +66,16 @@ public class main {
 
 
     public static int znak ( String vvod, int fromIndex) {
-        //Определяем знак
+        //Определяем знак ПОЧЕМУ ОНО ПРОПУСКАЕТ ЗНАКИ???
         char[] znaki = {'*','/','+','-'};
         int positionZnak = -1;
         for (int i = 0; i < znaki.length; i++){
             if (positionZnak == -1){
                 positionZnak = vvod.indexOf(znaki[i], fromIndex);
             }
+            //System.out.println(positionZnak + " - positionZnak");
         }
+
         return positionZnak;
     }
 
@@ -82,15 +83,16 @@ public class main {
     public static ArrayList<Integer> poiskVsehZnakov(String vvod){
         /*нужно найти все знаки которые есть в примере КАК ЭТО СДЕЛАТЬ? 0_0
          а что если найти колличество знаков?
+         заморочился и сделал динамический массив
          */
         ArrayList <Integer> arrayList = new ArrayList<Integer>();
         arrayList.add(0,0);
-        int  i = 1, k;
+        int  i = 1;
         vvod = " " + vvod;
         while (znak(vvod,arrayList.get(i-1) + 1 ) != -1){
             arrayList.add(i, znak(vvod,arrayList.get(i-1) + 1 ));
             //System.out.println(arrayList.get(i) + " - arrayList.get  (i) - " + i);
-            System.out.println(arrayList.get(i-1) + 1 + " fromIndex");
+            //System.out.println(arrayList.get(i-1) + 1 + " fromIndex");
             i++;
         }
         return (arrayList);
