@@ -27,6 +27,18 @@ public class main {
             System.out.printf("last: %s\n", last);
         }
         //блок математики
+        float mnoj = 0f;
+        if (operator.contains("*")){
+            mnoj = Float.parseFloat(operand.get(operator.indexOf("*")));
+            try {
+                mnoj *=  Float.parseFloat(operand.get(operator.indexOf("*")+1));
+                operand.add(Integer.parseInt(operand.get(operator.indexOf("*"))),String.valueOf(mnoj));
+            } catch (IndexOutOfBoundsException exc){
+                mnoj *=  Float.parseFloat(last);
+                operand.add(operator.indexOf("*"),String.valueOf(mnoj));
+            }
+        }
+        System.out.println(mnoj + " - mnoj - xueta - " + operand.get(operator.indexOf("*")+1));
         float sum = Float.parseFloat(operand.get(0));
         for(int f = 0; f < operand.size(); f++){
             if (operator.get(f).equals("+")) {
@@ -57,9 +69,9 @@ public class main {
                     sum /= Float.parseFloat(last);
                 }
             }
-
+            System.out.println(sum + " - sum - f - " + f);
         }
-        System.out.println(sum);
+//        System.out.println(sum);
 //        System.out.println(1+5*2);
     }
 }
