@@ -28,17 +28,24 @@ public class main {
         }
         //блок математики
         float mnoj = 0f;
-        if (operator.contains("*")){
+         while(operator.contains("*")){
             mnoj = Float.parseFloat(operand.get(operator.indexOf("*")));
             try {
                 mnoj *=  Float.parseFloat(operand.get(operator.indexOf("*")+1));
-                operand.add(Integer.parseInt(operand.get(operator.indexOf("*"))),String.valueOf(mnoj));
+                operand.add(operator.indexOf("*")+1,String.valueOf(mnoj));
+                operand.remove(operator.indexOf("*"));
+                operand.remove(operator.indexOf("*")+1);
+                operator.remove(operator.indexOf("*"));
             } catch (IndexOutOfBoundsException exc){
                 mnoj *=  Float.parseFloat(last);
-                operand.add(operator.indexOf("*"),String.valueOf(mnoj));
+                operand.add(operator.indexOf("*")+1,String.valueOf(mnoj));
+                operand.remove(operator.indexOf("*"));
+                operand.remove(operator.indexOf("*")+1);
+                operator.remove(operator.indexOf("*"));
             }
         }
-        System.out.println(mnoj + " - mnoj - xueta - " + operand.get(operator.indexOf("*")+1));
+        System.out.println(operand + " " + operator);
+        System.out.println(mnoj + " - mnoj - xueta - ");
         float sum = Float.parseFloat(operand.get(0));
         for(int f = 0; f < operand.size(); f++){
             if (operator.get(f).equals("+")) {
